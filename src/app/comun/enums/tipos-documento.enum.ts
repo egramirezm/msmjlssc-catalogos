@@ -1,0 +1,3 @@
+export enum TipoDocumento{
+  REGISTRO_JUICIOS_LABORALES_NIVEL_OOAD=1
+}

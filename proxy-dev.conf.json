@@ -1,0 +1,45 @@
+{
+  "/msnmlssc-oauth": {
+    "target": "http://localhost:8081/msnmlssc-oauth",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msnmlssc-oauth": "" }
+  },
+  "/msmjlssc-catalogos":{
+    "target": "http://localhost:808#/msmjlssc-catalogos",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msmjlssc-catalogos": "" }
+  },
+  "/msmjlssc-juicios":{
+    "target": "http://localhost:808#/msmjlssc-juicios",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msmjlssc-juicios": "" }
+  },
+  "/msmjlssc-archivos":{
+    "target": "http://localhost:808#/msmjlssc-archivos",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msmjlssc-archivos": "" }
+  },
+  "/msmjlssc-interfaces":{
+    "target": "http://localhost:808#/msmjlssc-interfaces",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msmjlssc-interfaces": "" }
+  },
+  "/guinmlssc-web": {
+    "target": "https://ssc-pre.cloudapps.imss.gob.mx/guinmlssc-web",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/guinmlssc-web": "" }
+  },
+  "/msmjlssc-reportes": {
+    "target": "http://localhost:808#/msmjlssc-reportes",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": { "^/msmjlssc-reportes": "" }
+  }
+
+}

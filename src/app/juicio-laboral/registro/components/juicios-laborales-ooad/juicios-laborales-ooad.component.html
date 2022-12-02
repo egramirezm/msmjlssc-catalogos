@@ -1,0 +1,158 @@
+<app-encabezado [titulo]="'Registro juicioS laborales nivel OOAD'"></app-encabezado>
+
+<div class="container">
+  <div class="example-action-buttons">
+    <div class="col-sm-12"><br>
+      <div class="contenido-der">
+        <span mat-button (click)="accordion.closeAll()">
+          <span style="font-size: 25px; cursor: pointer;" aria-hidden="true">
+            <img src="./assets/img/Colapseded.svg" alt="expander">
+          </span>
+        </span>
+        <span mat-button (click)="accordion.openAll()">
+          <span style="font-size: 25px;  cursor: pointer;" aria-hidden="true">
+            <img src="./assets/img/Expanded.svg" alt="expander">
+          </span>
+        </span>
+        &nbsp;&nbsp;
+      </div>
+      <div class="basic-other-container">
+        <mat-accordion class="example-headers-align" multi>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Demanda</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formDemanda">
+              <formly-form [model]="modelDemanda" [fields]="fieldsDemanda" [form]="formDemanda"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Actor principal</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formActor">
+              <formly-form [model]="modelActor" [fields]="fieldsActor" [form]="formActor"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Conflicto Individual de Seguridad Social</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formConflicto">
+              <formly-form [model]="modelConflicto" [fields]="fieldsConflicto" [form]="formConflicto"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Finado</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formFinado">
+              <formly-form [model]="modelFinado" [fields]="fieldsFinado" [form]="formFinado"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Representante</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formRepresentante">
+              <formly-form [model]="modelRepresentante" [fields]="fieldsRepresentante" [form]="formRepresentante"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Acciones reclamadas</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formAcciones">
+              <formly-form [model]="modelAcciones" [fields]="fieldsAcciones" [form]="formAcciones"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Datos del juicio</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formJuicio">
+              <formly-form [model]="modelJuicio" [fields]="fieldsJuicio" [form]="formJuicio"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>Abogado responsable</strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                <small></small>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form [formGroup]="formAbogado">
+              <formly-form [model]="modelAbogado" [fields]="fieldsAbogado" [form]="formAbogado"></formly-form>
+              <button type="submit" hidden id="save-form"></button>
+            </form>
+          </mat-expansion-panel>
+          <br>
+
+        </mat-accordion>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-pie-pagina [callbackFunction]="doRegistrar"></app-pie-pagina>

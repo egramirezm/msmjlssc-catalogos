@@ -1,0 +1,47 @@
+{
+    "/msnmlssc-oauth": {
+      "target": "https://ssc-qa.cloudapps.imss.gob.mx/msnmlssc-oauth",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/msnmlssc-oauth": "" }
+    },
+    "/msmjlssc-catalogos":{
+      "target": "https://msmjlssc-qa.cloudapps.imss.gob.mx/msmjlssc-catalogos",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/msmjlssc-catalogos": "" }
+    },
+    "/msmjlssc-juicios":{
+      "target": "https://msmjlssc-qa.cloudapps.imss.gob.mx/msmjlssc-juicios",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/msmjlssc-juicios": "" }
+    },
+    "/msmjlssc-archivos":{
+      "target": "https://msmjlssc-qa.cloudapps.imss.gob.mx/msmjlssc-archivos",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/msmjlssc-archivos": "" }
+    },
+    "/msmjlssc-interfaces":{
+      "target": "https://msmjlssc-qa.cloudapps.imss.gob.mx/msmjlssc-interfaces",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/msmjlssc-interfaces": "" }
+    },
+    "/guinmlssc-web": {
+      "target": "https://ssc-qa.cloudapps.imss.gob.mx/guinmlssc-web",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/guinmlssc-web": "" }
+    },
+    "/msmjlssc-reportes": {
+      "target": "https://msmjlssc-qa.cloudapps.imss.gob.mx/msmjlssc-reportes",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": { "^/msmjlssc-reportes": "" }
+    }
+
+
+
+}
