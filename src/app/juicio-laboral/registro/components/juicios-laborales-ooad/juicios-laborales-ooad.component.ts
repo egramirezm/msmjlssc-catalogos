@@ -94,6 +94,14 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
               { value: 0, label: 'No' },
               { value: 1, label: 'Sí' },
             ],
+            change: (field, $event)=>{
+              if(field.formControl.value==0){
+                console.log('se limpia formulario')
+                field.form.controls.numExpedienteIncompetencia.setValue(null);
+                field.form.controls.anioExpedienteIncompetencia.setValue(null);
+                field.form.controls.cveJuntaIncompetencia.setValue(null);
+              }
+          },
           },
         },
       ],
@@ -203,8 +211,8 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
             type: 'mat-radio',
             label: '¿Se repone procedimiento?',
             options: [
-              { value: 1, label: 'Sí' },
               { value: 0, label: 'No' },
+              { value: 1, label: 'Sí' },
             ],
 
           },
