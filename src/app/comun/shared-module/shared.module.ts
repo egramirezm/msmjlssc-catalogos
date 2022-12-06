@@ -45,6 +45,7 @@ import { dateField } from '../formly-types/date.field';
 import { WrapperFormFieldRadio } from '../formly-wrapper/form-field-radio';
 import { timeField } from '../formly-types/time.field';
 import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { NoAnio, zeroFill } from '../formly-validator/validators';
 
 
 
@@ -108,8 +109,42 @@ import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
             },
           },
           { name: 'date', component: dateField, wrappers:['form-field'],},
-          { name: 'time', component: timeField, wrappers:['form-field'],}
-
+          { name: 'time', component: timeField, wrappers:['form-field'],},
+          {
+            name:'input-zero-fill',
+            extends: 'input',
+            wrappers:['form-field'],
+            defaultOptions:{
+              templateOptions:{
+                placeholder: '5 dígitos',
+                required: true,
+                maxLength: 5,
+                minLength: 5,
+                blur: (field, $event) =>{
+                  if(field.formControl.value){
+                    field.formControl.setValue(zeroFill(field.formControl.value,5))
+                  }
+                }
+              }
+            }
+          },
+          {
+            name:'input-anio',
+            extends: 'input',
+            wrappers:['form-field'],
+            defaultOptions:{
+              templateOptions:{
+                required: true,
+                placeholder: 'Año',
+                minLength: 4,
+                maxLength: 4,
+                min: 1988,
+              },
+              validators: {
+                validation: [NoAnio],
+              },
+            }
+          }
         ],
         wrappers: [
           {name: 'mat-radio-wrapper-inline',component:WrapperFormFieldInline},

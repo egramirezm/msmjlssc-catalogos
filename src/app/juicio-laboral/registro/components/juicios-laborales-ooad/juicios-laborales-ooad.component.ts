@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { NoExpediente } from 'src/app/comun/formly-validator/validators';
 import { GeneralComponent } from 'src/app/comun/general-component/general.component';
 
 @Component({
@@ -64,34 +65,35 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
         {
           className: 'col-md-3',
           key: 'numExpediente',
-          type: 'input',
+          type: 'input-zero-fill',
           templateOptions: {
             label: 'Número de expediente',
-            required: true,
+          },
+          validators: {
+            validation: [NoExpediente],
           },
         },
         {
           className: 'col-md-3',
           key: 'anioExpediente',
-          type: 'input',
+          type: 'input-anio',
           templateOptions: {
             label: 'Año del expediente',
-            required: true,
-          },
+          }
         },
         {
           className: 'col-md-6',
           key: 'incompetencia',
           type: 'mat-radio',
+          defaultValue : 0,
           wrappers: ['mat-radio-wrapper-inline',],
           templateOptions: {
             type: 'mat-radio',
             label: '¿Procede de una incompetencia?',
             options: [
-              { value: 1, label: 'Sí' },
               { value: 0, label: 'No' },
+              { value: 1, label: 'Sí' },
             ],
-            required: true,
           },
         },
       ],
@@ -102,20 +104,59 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
         {
           className: 'col-md-3',
           key: 'numExpedienteIncompetencia',
-          type: 'input',
+          type: 'input-zero-fill',
           templateOptions: {
             label: 'Número de expediente',
-            required: true,
           },
+          validators: {
+            validation: [NoExpediente],
+          },
+
+          expressionProperties:{
+            'templateOptions.disabled': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return false;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return true;
+              }
+            },
+            'templateOptions.required': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return true;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return false;
+              }
+            },
+          }
+
         },
         {
           className: 'col-md-3',
           key: 'anioExpedienteIncompetencia',
-          type: 'input',
+          type: 'input-anio',
           templateOptions: {
             label: 'Año del expediente',
-            required: true,
           },
+          expressionProperties:{
+            'templateOptions.disabled': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return false;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return true;
+              }
+            },
+            'templateOptions.required': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return true;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return false;
+              }
+            },
+          }
         },
         {
           className: 'col-md-6',
@@ -127,8 +168,26 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
             options: [],
             valueProp: 'value',
             labelProp: 'label',
-            required: true,
+
           },
+          expressionProperties:{
+            'templateOptions.disabled': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return false;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return true;
+              }
+            },
+            'templateOptions.required': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return true;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return false;
+              }
+            },
+          }
         },
       ],
     },
@@ -137,7 +196,7 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
       fieldGroup: [
         {
           className: 'col-md-6',
-          key: 'incompetencia',
+          key: 'reponeProcedimiento',
           type: 'mat-radio',
           wrappers: ['mat-radio-wrapper-inline',],
           templateOptions: {
@@ -147,8 +206,34 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
               { value: 1, label: 'Sí' },
               { value: 0, label: 'No' },
             ],
-            required: true,
+
           },
+          hideExpression: () => {
+            if(this.modelDemanda.incompetencia == 1){
+              return false;
+            }
+            if(this.modelDemanda.incompetencia == 0){
+                return true;
+            }
+         },
+          expressionProperties:{
+            'templateOptions.disabled': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return false;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return true;
+              }
+            },
+            'templateOptions.required': (model: any) => {
+              if(this.modelDemanda.incompetencia == 1){
+                return true;
+              }
+              if(this.modelDemanda.incompetencia == 0){
+                  return false;
+              }
+            },
+          }
         },
       ],
     },
