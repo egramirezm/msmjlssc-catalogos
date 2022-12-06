@@ -1,0 +1,67 @@
+<app-encabezado [titulo]="'JUICIO LABORAL NIVEL DELEGACIONAL'"></app-encabezado>
+
+<div class="container">
+    <div class="example-action-buttons">
+      <div class="col-sm-12"><br>
+        <div class="basic-other-container">
+          <mat-accordion class="example-headers-align" multi>
+  
+            <mat-expansion-panel [expanded]="true">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong>Lista de actores</strong>
+                </mat-panel-title>
+                <mat-panel-description>
+                  <small></small>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <form [formGroup]="formActor">
+                <formly-form [model]="modelActor" [fields]="fieldsActor" [form]="formActor"></formly-form>
+                <button type="submit" hidden id="save-form"></button>
+              </form>
+              <table mat-table [dataSource]="dataSource" >
+
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+              
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef> Nombre(s) </th>
+                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> Apellido paterno </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+              
+                <!-- Weight Column -->
+                <ng-container matColumnDef="weight">
+                  <th mat-header-cell *matHeaderCellDef> Apellido materno </th>
+                  <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                </ng-container>
+              
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="symbol">
+                  <th mat-header-cell *matHeaderCellDef> Maticula </th>
+                  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              
+              
+              <br>
+            </mat-expansion-panel>
+            <br>
+  
+          </mat-accordion>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+<app-pie-pagina [callbackFunction]=""></app-pie-pagina>

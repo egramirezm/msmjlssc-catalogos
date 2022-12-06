@@ -769,6 +769,19 @@ output {
   color: white;
 }
 
+.btn-fill2{
+  background:  #ffffff!important;
+  color: #9F2241!important;
+}
+
+table {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #EEEEEE;
+  border-radius: 0px 10px 10px 10px;
+  
+}
+
 .btn-full-width {
   width: 100%;
   margin-top: 7px;

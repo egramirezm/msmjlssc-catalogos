@@ -7,5 +7,6 @@ export const NAV = {
    registroNotificacionBase:'notificacion',
    nuevoResgistroBase:'nuevo-registro',
    registroJuicioLaboralOoad:'nuevo-registro-juicio-laboral-ooad',
+   actores:'administracion-actores'
 };
 
