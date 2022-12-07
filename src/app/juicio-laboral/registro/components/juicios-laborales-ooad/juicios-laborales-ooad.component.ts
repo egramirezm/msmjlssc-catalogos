@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { AlertService } from 'src/app/comun/alert';
 import { NoExpediente } from 'src/app/comun/formly-validator/validators';
 import { GeneralComponent } from 'src/app/comun/general-component/general.component';
 
@@ -51,10 +52,13 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
           templateOptions: {
             label: 'Junta',
             placeholder: 'Seleccionar',
-            options: [],
+            options: this._catalogoService.getJunta(),
             valueProp: 'value',
             labelProp: 'label',
             required: true,
+            change :(field,$event)=>{
+              this.onValidaExpediente();
+            }
           },
         },
       ],
@@ -68,6 +72,9 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
           type: 'input-zero-fill',
           templateOptions: {
             label: 'Número de expediente',
+            change :(field,$event)=>{
+              this.onValidaExpediente();
+            }
           },
           validators: {
             validation: [NoExpediente],
@@ -79,6 +86,9 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
           type: 'input-anio',
           templateOptions: {
             label: 'Año del expediente',
+            change :(field,$event)=>{
+              this.onValidaExpediente();
+            }
           }
         },
         {
@@ -173,7 +183,7 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
           templateOptions: {
             label: 'Junta',
             placeholder: 'Seleccionar',
-            options: [],
+            options: this._catalogoService.getJunta(),
             valueProp: 'value',
             labelProp: 'label',
 
@@ -214,6 +224,11 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
               { value: 0, label: 'No' },
               { value: 1, label: 'Sí' },
             ],
+            change: (field, $event)=>{
+              if(field.formControl.value==0){
+                this.onValidaProcedimiento();
+              }
+          },
 
           },
           hideExpression: () => {
@@ -1014,6 +1029,24 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
     this.validaCamposFormulario(formValidar);
   };
 
+  onValidaExpediente(){
+    // valida los campos de numero de juicio año de expediente y junta para realizar una busqueda del expediente
+    setTimeout(() => {
+      if(this.formDemanda.controls.cveJunta.valid &&
+        this.formDemanda.controls.numExpediente.valid &&
+        this.formDemanda.controls.anioExpediente.valid){
+        this._alertsServices.error('El expediente ya se encuentra registrado')
+      }
+     }, 200);
+  }
 
+  onValidaProcedimiento(){
+    // validar si existe procedimiento
+    // si
+    //
+
+
+    //no
+  }
 
 }

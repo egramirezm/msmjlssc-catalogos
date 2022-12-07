@@ -10,7 +10,7 @@ import { AccountService } from './comun/service/account.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'base-proyecto';
+  title = 'guimjlvnml-web';
 
   constructor(private accountService:
     AccountService,

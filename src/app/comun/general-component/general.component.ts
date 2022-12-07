@@ -11,6 +11,7 @@ import { AlertService } from 'src/app/comun/alert';
 import { SSCRutasHome } from '../enums/ssc-rutas-home.enum';
 import { FileUtils } from '../util/file-util';
 import { MatAccordion } from '@angular/material/expansion';
+import { CatalogoService } from '../service/catalogos.service';
 
 @Component({
   selector: 'app-general',
@@ -28,8 +29,9 @@ export class GeneralComponent implements OnDestroy{
   existeExcepcion: boolean;
 
   private _ruta: ActivatedRoute;
-  private _alertsServices: AlertService;
+  protected _alertsServices: AlertService;
   protected _excepcionEncontrada: any;
+  protected _catalogoService: CatalogoService;
 
   constructor(
     public router?: Router,
@@ -39,6 +41,7 @@ export class GeneralComponent implements OnDestroy{
   this.delegacionUsuario = this.accountService.getDelegacion();
   this._ruta = injector.get(ActivatedRoute);
   this._alertsServices = injector.get(AlertService);
+  this._catalogoService = injector.get(CatalogoService);
 
   history.pushState(null, null, location.href);
   this.subscripcion = fromEvent(window, 'popstate').subscribe(_ => {
