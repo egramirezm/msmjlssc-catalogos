@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.log4j.Log4j2;
 import mx.gob.imss.cit.mjlssc.service.EstadoService;
+import mx.gob.imss.cit.mjlssc.service.MunicipioAlcaldiaService;
 
 /***
  * 
@@ -20,22 +21,18 @@ import mx.gob.imss.cit.mjlssc.service.EstadoService;
  */
 @Log4j2
 @RestController
-@RequestMapping("/estado")
-public class EstadoController {
+@RequestMapping("/municipio")
+public class MunicipioAlcaldiaController {
 
 	@Autowired
-	private EstadoService estadoService;
+	private MunicipioAlcaldiaService municipioService;
 
-	@GetMapping("/")
-	public ResponseEntity<?> get() {
-		log.info("Inicio consulta de Estados ");
-		return estadoService.getEstados();
-	}
+
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getById(@PathVariable Long id) {
-		log.info("Inicio consulta de Estados  by id");
-		return estadoService.getEstadoById(id);
+	@GetMapping("/{cveEstado}")
+	public ResponseEntity<?> getById(@PathVariable Long cveEstado) {
+		log.info("Inicio consulta de Municipio Alcaldias  by cveEstado");
+		return municipioService.findByCveEstadoNomMunicipioAlcaldias(cveEstado);
 	}
 
 }

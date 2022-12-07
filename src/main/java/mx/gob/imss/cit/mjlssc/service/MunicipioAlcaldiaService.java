@@ -9,9 +9,8 @@ import org.springframework.http.ResponseEntity;
  * @author
  *
  */
-public interface EstadoService {
+public interface MunicipioAlcaldiaService {
 
-	ResponseEntity<?> getEstados();
-	ResponseEntity<?> getEstadoById(Long id);
+	ResponseEntity<?> findByCveEstadoNomMunicipioAlcaldias(Long cveEstado);
 
 }

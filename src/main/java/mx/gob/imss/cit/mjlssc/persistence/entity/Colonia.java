@@ -19,7 +19,7 @@ import mx.gob.imss.cit.nmlssc.support.entity.LogicDeletedEntity;
  */
 @Data
 @Entity
-@Table(name = "\"SSCC_COLONIA_CP\"", catalog = DataBaseShemaConf.SCHEMANML)
+@Table(name = "\"SSCC_COLONIA_CP\"", catalog = DataBaseShemaConf.SCHEMA_JL)
 @EqualsAndHashCode(callSuper = false)
 public class Colonia extends LogicDeletedEntity<Long> {
 	private static final long serialVersionUID = 1L;

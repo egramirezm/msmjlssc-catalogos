@@ -5,6 +5,7 @@ package mx.gob.imss.cit.mjlssc.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,6 +51,27 @@ public class EstadoServiceImpl implements EstadoService {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		return new ResponseEntity<>(estadosDtos, HttpStatus.OK);
+	}
+
+	@Override
+	public ResponseEntity<?> getEstadoById(Long id) {
+		log.info("Inicio Estados getEstadoById");
+		EstadoDto edoDTO=new EstadoDto();
+		try {
+			// ejemplo projection
+			//SsccDelegacionView delegacionProjection = ssccDelegacionRepository.findByRefAbreviacion("DFS",SsccDelegacionView.class);
+			Optional<Estado> estadoOpt = estadoRepository.findById(id);
+			if(estadoOpt.isPresent()) {
+				Estado edo= estadoOpt.get();
+				 edoDTO= estadoMapper.toDto(edo);
+			}
+			// delegacionDtos = ObjectMapperUtils.mapAll(delegaciones,SsccDelegacionDto.class);
+			
+		} catch (Exception e) {
+			log.error("Exception EstadoService getEstadoById", e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		return new ResponseEntity<>(edoDTO, HttpStatus.OK);
 	}
 
 
