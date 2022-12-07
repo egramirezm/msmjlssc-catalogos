@@ -11,6 +11,7 @@ import { NotificacionBaseComponent } from './components/notificacion-base/notifi
 import { NuevoRegistroBaseComponent } from './components/nuevo-registro-base/nuevo-registro-base.component';
 import { PiePaginaComponent } from './components/shared-page/pie-pagina/pie-pagina.component';
 import { JuiciosLaboralesOoadComponent } from './components/juicios-laborales-ooad/juicios-laborales-ooad.component';
+import { DemandaComponent } from './components/juicios-laborales-ooad/cards/demanda/demanda.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { JuiciosLaboralesOoadComponent } from './components/juicios-laborales-oo
     NuevoRegistroBaseComponent,
     EncabezadoComponent,
     PiePaginaComponent,
-    JuiciosLaboralesOoadComponent
+    JuiciosLaboralesOoadComponent,
+    DemandaComponent
   ],
   imports: [
     CommonModule,

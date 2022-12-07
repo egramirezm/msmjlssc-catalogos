@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { AlertService } from 'src/app/comun/alert';
-import { NoExpediente } from 'src/app/comun/formly-validator/validators';
+import { BehaviorSubject } from 'rxjs';
 import { GeneralComponent } from 'src/app/comun/general-component/general.component';
 
 @Component({
@@ -15,13 +14,12 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
 
   constructor(public router: Router,) {super(router); }
 
-  //demanda
-  modelDemanda:any={};
-  formDemanda = new FormGroup({});
+  inputEvent: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
   //actor principal
   modelActor:any={};
   formActor = new FormGroup({});
-  //conflicto individual
+  //conflicto individuals
   modelConflicto:any={};
   formConflicto = new FormGroup({});
   //finado
@@ -40,227 +38,6 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
   modelAbogado:any={};
   formAbogado = new FormGroup({});
   //campos
-
-  fieldsDemanda: FormlyFieldConfig[] = [
-    {
-      fieldGroupClassName: 'row',
-      fieldGroup: [
-        {
-          className: 'col-md-12',
-          key: 'cveJunta',
-          type: 'select',
-          templateOptions: {
-            label: 'Junta',
-            placeholder: 'Seleccionar',
-            options: this._catalogoService.getJunta(),
-            valueProp: 'value',
-            labelProp: 'label',
-            required: true,
-            change :(field,$event)=>{
-              this.onValidaExpediente();
-            }
-          },
-        },
-      ],
-    },
-    {
-      fieldGroupClassName: 'row',
-      fieldGroup: [
-        {
-          className: 'col-md-3',
-          key: 'numExpediente',
-          type: 'input-zero-fill',
-          templateOptions: {
-            label: 'Número de expediente',
-            change :(field,$event)=>{
-              this.onValidaExpediente();
-            }
-          },
-          validators: {
-            validation: [NoExpediente],
-          },
-        },
-        {
-          className: 'col-md-3',
-          key: 'anioExpediente',
-          type: 'input-anio',
-          templateOptions: {
-            label: 'Año del expediente',
-            change :(field,$event)=>{
-              this.onValidaExpediente();
-            }
-          }
-        },
-        {
-          className: 'col-md-6',
-          key: 'incompetencia',
-          type: 'mat-radio',
-          defaultValue : 0,
-          wrappers: ['mat-radio-wrapper-inline',],
-          templateOptions: {
-            type: 'mat-radio',
-            label: '¿Procede de una incompetencia?',
-            options: [
-              { value: 0, label: 'No' },
-              { value: 1, label: 'Sí' },
-            ],
-            change: (field, $event)=>{
-              if(field.formControl.value==0){
-                console.log('se limpia formulario')
-                field.form.controls.numExpedienteIncompetencia.setValue(null);
-                field.form.controls.anioExpedienteIncompetencia.setValue(null);
-                field.form.controls.cveJuntaIncompetencia.setValue(null);
-              }
-          },
-          },
-        },
-      ],
-    },
-    {
-      fieldGroupClassName: 'row',
-      fieldGroup: [
-        {
-          className: 'col-md-3',
-          key: 'numExpedienteIncompetencia',
-          type: 'input-zero-fill',
-          templateOptions: {
-            label: 'Número de expediente',
-          },
-          validators: {
-            validation: [NoExpediente],
-          },
-
-          expressionProperties:{
-            'templateOptions.disabled': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return false;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return true;
-              }
-            },
-            'templateOptions.required': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return true;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return false;
-              }
-            },
-          }
-
-        },
-        {
-          className: 'col-md-3',
-          key: 'anioExpedienteIncompetencia',
-          type: 'input-anio',
-          templateOptions: {
-            label: 'Año del expediente',
-          },
-          expressionProperties:{
-            'templateOptions.disabled': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return false;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return true;
-              }
-            },
-            'templateOptions.required': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return true;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return false;
-              }
-            },
-          }
-        },
-        {
-          className: 'col-md-6',
-          key: 'cveJuntaIncompetencia',
-          type: 'select',
-          templateOptions: {
-            label: 'Junta',
-            placeholder: 'Seleccionar',
-            options: this._catalogoService.getJunta(),
-            valueProp: 'value',
-            labelProp: 'label',
-
-          },
-          expressionProperties:{
-            'templateOptions.disabled': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return false;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return true;
-              }
-            },
-            'templateOptions.required': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return true;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return false;
-              }
-            },
-          }
-        },
-      ],
-    },
-    {
-      fieldGroupClassName: 'row',
-      fieldGroup: [
-        {
-          className: 'col-md-6',
-          key: 'reponeProcedimiento',
-          type: 'mat-radio',
-          wrappers: ['mat-radio-wrapper-inline',],
-          templateOptions: {
-            type: 'mat-radio',
-            label: '¿Se repone procedimiento?',
-            options: [
-              { value: 0, label: 'No' },
-              { value: 1, label: 'Sí' },
-            ],
-            change: (field, $event)=>{
-              if(field.formControl.value==0){
-                this.onValidaProcedimiento();
-              }
-          },
-
-          },
-          hideExpression: () => {
-            if(this.modelDemanda.incompetencia == 1){
-              return false;
-            }
-            if(this.modelDemanda.incompetencia == 0){
-                return true;
-            }
-         },
-          expressionProperties:{
-            'templateOptions.disabled': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return false;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return true;
-              }
-            },
-            'templateOptions.required': (model: any) => {
-              if(this.modelDemanda.incompetencia == 1){
-                return true;
-              }
-              if(this.modelDemanda.incompetencia == 0){
-                  return false;
-              }
-            },
-          }
-        },
-      ],
-    },
-  ];
 
   fieldsActor: FormlyFieldConfig[] = [
     {
@@ -1020,33 +797,14 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
 
 
   doRegistrar = async (): Promise<void> => {
-    const formValidar = [
-      this.formDemanda,this.formJuicio
-    ];
 
-    console.log(this.modelDemanda,this.modelJuicio)
+    this.inputEvent.next('valida');
+    console.log('manda señal que se valide para registrar')
 
-    this.validaCamposFormulario(formValidar);
   };
 
-  onValidaExpediente(){
-    // valida los campos de numero de juicio año de expediente y junta para realizar una busqueda del expediente
-    setTimeout(() => {
-      if(this.formDemanda.controls.cveJunta.valid &&
-        this.formDemanda.controls.numExpediente.valid &&
-        this.formDemanda.controls.anioExpediente.valid){
-        this._alertsServices.error('El expediente ya se encuentra registrado')
-      }
-     }, 200);
+
+  receiveDemandaEvent($event){
+    console.log('receive Event',$event)
   }
-
-  onValidaProcedimiento(){
-    // validar si existe procedimiento
-    // si
-    //
-
-
-    //no
-  }
-
 }

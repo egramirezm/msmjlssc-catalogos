@@ -19,21 +19,7 @@
       <div class="basic-other-container">
         <mat-accordion class="example-headers-align" multi>
 
-          <mat-expansion-panel [expanded]="true">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <strong>Demanda</strong>
-              </mat-panel-title>
-              <mat-panel-description>
-                <small></small>
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <form [formGroup]="formDemanda">
-              <formly-form [model]="modelDemanda" [fields]="fieldsDemanda" [form]="formDemanda"></formly-form>
-              <button type="submit" hidden id="save-form"></button>
-            </form>
-          </mat-expansion-panel>
-          <br>
+         <app-demanda [inputEvent]="inputEvent" (demandaEvent)="receiveDemandaEvent($event)" ></app-demanda>
 
           <mat-expansion-panel [expanded]="true">
             <mat-expansion-panel-header>
