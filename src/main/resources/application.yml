@@ -10,9 +10,10 @@ spring:
     #url: ${CADENA_CONEXION_DB_MJLSSC}
     #username: ${USER_DB_MJLSSC}
     #password: ${PASSWORD_DB_MJLSSC}
-    url:  jdbc:mariadb:failover://localhost:3306/jlisscbdqa01?autoReconnect=true
-    username: root
-    password: 123456
+    #url:  jdbc:mariadb:failover://localhost:3306/jlisscbdqa01?autoReconnect=true
+    url:  jdbc:mariadb://10.100.8.166:3306/NMLSSCBDQA01?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: NMLSSCBD_USER
+    password: NML55CBD_U534
     
     driverClassName: org.mariadb.jdbc.Driver
   jpa:
