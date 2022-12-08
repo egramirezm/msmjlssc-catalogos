@@ -5,12 +5,15 @@ export const API = {
   seguridad: {
     oauth: environment.apiNmlsscSeguridad + '/v1/oauth/token',
   },
+
   catalogos: {
     
     colonia: environment.apiJlsscCatalogos + '/v1/colonia',
     municipioAlcaldia: environment.apiJlsscCatalogos + '/v1/municipio',
     estado: environment.apiJlsscCatalogos + '/v1/estado',
     
+   delegacion : environment.apiJlsscCatalogos + '/v1/delegacionCatalog',
+    junta: environment.apiJlsscCatalogos + '/v1/juntaCatalog'
   },
   sscHome: environment.sscHome + '/inicio',
   sscLogin: environment.sscHome + '/login',
