@@ -119,6 +119,9 @@ export class DemandaComponent extends GeneralComponent implements OnInit {
           type: 'input-zero-fill',
           templateOptions: {
             label: 'Número de expediente',
+            change :(field,$event)=>{
+              this.onValidaExpedienteIncompetencia();
+            }
           },
           validators: {
             validation: [NoExpediente],
@@ -150,6 +153,9 @@ export class DemandaComponent extends GeneralComponent implements OnInit {
           type: 'input-anio',
           templateOptions: {
             label: 'Año del expediente',
+            change :(field,$event)=>{
+              this.onValidaExpedienteIncompetencia();
+            }
           },
           expressionProperties:{
             'templateOptions.disabled': (model: any) => {
@@ -180,6 +186,9 @@ export class DemandaComponent extends GeneralComponent implements OnInit {
             options: this._catalogoService.getJunta(),
             valueProp: 'value',
             labelProp: 'label',
+            change :(field,$event)=>{
+              this.onValidaExpedienteIncompetencia();
+            }
 
           },
           expressionProperties:{
@@ -219,9 +228,8 @@ export class DemandaComponent extends GeneralComponent implements OnInit {
               { value: 1, label: 'Sí' },
             ],
             change: (field, $event)=>{
-              if(field.formControl.value==0){
-                this.onReponeProcedimiento();
-              }
+                this.onReponeProcedimiento(field.formControl.value);
+
           },
 
           },
@@ -286,11 +294,11 @@ export class DemandaComponent extends GeneralComponent implements OnInit {
   }
 
   onValidaExpedienteIncompetencia(){
-    // valida los campos de numero de juicio año de expediente y junta para realizar una busqueda del expediente
+    // valida los campos de numero de juicio año de expediente y junta para realizar una busqueda del expediente de inccompetencia
     setTimeout(() => {
-      if(this.formDemanda.controls.cveJuntaIncompetencia.valid &&
+      if( this.formDemanda.controls.cveJuntaIncompetencia.valid &&
         this.formDemanda.controls.numExpedienteIncompetencia.valid &&
-        this.formDemanda.controls.anioExpedienteIncompetencia.valid){
+        this.formDemanda.controls.anioExpedienteIncompetencia.valid ){
         this._alertsServices.error('Valida expediente ya se encuentra registrado y concluido el incidente de Incompetencia')
       }
      }, 200);
@@ -302,19 +310,23 @@ export class DemandaComponent extends GeneralComponent implements OnInit {
      }, 400);
   }
 
-  onReponeProcedimiento(){
+  onReponeProcedimiento(value){
     // validar si existe procedimiento
     // si
-    //
-    setTimeout(() => {
-      this._alertsServices.error('el sistema debe replicar la toda información del expediente terminado por Incompetencia al nuevo expediente que se está capturando y se resplicará la información de la fases procesales del expediente terminado por incompetencia, incluyendo el nombre del usuario y fecha de las actualizaciones (historial). La única información que capturará el abgoado es abogado responsable, la fecha de asignación del abogado, representante')
-   }, 200);
+    if(value == 1){
+      setTimeout(() => {
+        this._alertsServices.error('el sistema debe replicar la toda información del expediente terminado por Incompetencia al nuevo expediente que se está capturando y se resplicará la información de la fases procesales del expediente terminado por incompetencia, incluyendo el nombre del usuario y fecha de las actualizaciones (historial). La única información que capturará el abgoado es abogado responsable, la fecha de asignación del abogado, representante')
+     }, 200);
+    }
+
 
     //no
+    if(value == 0){
+      setTimeout(() => {
+        this._alertsServices.error(' El sistema debe replicar la información de Actor(es), Acción(es) Reclamada(s), finados, trascendencia, CISS, fecha de presentación y fecha de notificación. El susuario debe de acpturar abogado responsable, fecha de asignación de abogado, representante, fecha y hora de audiencia inicial y cargar el documento de la incompetencia.')
+     }, 200);
+    }
 
-    setTimeout(() => {
-      this._alertsServices.error(' El sistema debe replicar la información de Actor(es), Acción(es) Reclamada(s), finados, trascendencia, CISS, fecha de presentación y fecha de notificación. El susuario debe de acpturar abogado responsable, fecha de asignación de abogado, representante, fecha y hora de audiencia inicial y cargar el documento de la incompetencia.')
-   }, 400);
 
 
   }
