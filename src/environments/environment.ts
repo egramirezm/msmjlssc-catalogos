@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiJlsscCatalogos: '/msmjlssc-catalogos',
+  apiJlsscCatalogos: 'http://localhost:8080/msmjlssc-catalogos',
   apiJlsscInterfaces: '/msmjlssc-interfaces',
   apiJlsscArchivos: '/msmjlssc-archivos',
   apiJlsscReportes: '/msmjlssc-reportes',

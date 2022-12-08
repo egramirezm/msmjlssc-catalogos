@@ -1,9 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { NoExpediente } from 'src/app/comun/formly-validator/validators';
 import { GeneralComponent } from 'src/app/comun/general-component/general.component';
+import { Estado } from 'src/app/comun/model/catalogo.model';
+import { CatalogoService } from 'src/app/comun/service/catalogo.service';
 
 @Component({
   selector: 'app-juicios-laborales-ooad',
@@ -12,7 +15,9 @@ import { GeneralComponent } from 'src/app/comun/general-component/general.compon
 })
 export class JuiciosLaboralesOoadComponent extends GeneralComponent implements OnInit {
 
-  constructor(public router: Router,) {super(router); }
+  constructor(public router: Router,private catalogosService: CatalogoService) {super(router); 
+  
+  }
 
   //demanda
   modelDemanda:any={};
@@ -22,6 +27,8 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
   formActor = new FormGroup({});
   //conflicto individual
   modelConflicto:any={};
+  public estados:any=[];
+
   formConflicto = new FormGroup({});
   //finado
   modelFinado:any={};
@@ -429,11 +436,16 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
           templateOptions: {
             label: 'Estado',
             placeholder: 'Seleccionar',
-            options: [],
-            valueProp: 'value',
-            labelProp: 'label',
+            opciones:  [],
+            valueProp: 'id',
+            labelProp: 'refNomEstado',
             required: true,
           },
+            hooks: {
+                  afterContentInit: (field) => {
+                    field.templateOptions.options = this.estados
+                  },
+                },
         },
         {
           className: 'col-md-6',
@@ -1001,8 +1013,24 @@ export class JuiciosLaboralesOoadComponent extends GeneralComponent implements O
   ];
 
   ngOnInit(): void {
+this.getEstados();
+    
   }
 
+  getEstados() {
+    console.log("get Estados" );
+    this.catalogosService.getEstado().subscribe( resp =>{
+      console.log("resp--> " , resp)
+  
+      this.estados = resp;
+
+      
+    }, (error: HttpErrorResponse) => {
+      debugger
+      console.log("get Estados" +error.message);
+    });
+    
+  }
 
   doRegistrar = async (): Promise<void> => {
     const formValidar = [
